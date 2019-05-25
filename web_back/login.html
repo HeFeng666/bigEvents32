@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/iconfont.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!-- 导入bootstrap  css样式 -->
+    <link rel="stylesheet" href="./js/bootstrap/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -28,12 +30,34 @@
                 <input type="submit" class="input_sub" value="登 录">
             </form>
         </div>
-
+    </div>
+    <!-- bootstrap模态框 -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button> -->
+                    <h4 class="modal-title" id="myModalLabel">温馨提示！！！</h4>
+                </div>
+                <div class="modal-body my_modal">
+                    请输入用户名和密码哦...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <!-- <button type="button" class="btn btn-primary">确认</button> -->
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 
 </html>
+<!-- 导入jquery -->
 <script src="./js/jquery-1.12.4.min.js"></script>
+<!-- 导入bootstrap   js -->
+<script src="./js/bootstrap/js/bootstrap.min.js"></script>
 <script>
     /*
     步骤:
@@ -62,7 +86,9 @@
             var password = $('.input_pass').val().trim();
             // 非空判断
             if (user_name == '' || password == '') {
-                alert('请输入您的用户名和密码');
+                // alert('请输入您的用户名和密码');
+                // 显示模态框
+                $('#myModal').modal()
                 return;
             }
             // ajax调用后台接口
@@ -77,7 +103,11 @@
                     console.log(backData);
                     // 判断失败
                     if (backData.code == 400) {
-                        alert('请输入正确的账号或密码')
+                        // 显示模态框
+                        $('#myModal').modal();
+                        // alert('请输入正确的账号或密码')
+                        // 通过自定义类名来选中提示框进而修改里面的文字
+                        $('.my_modal').text('请输入正确的用户名或密码')
                         // 判断成功
                     } else if (backData.code == 200) {
                         // alert('登录成功，即将跳转页面')
