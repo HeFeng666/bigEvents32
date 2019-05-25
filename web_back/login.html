@@ -29,8 +29,63 @@
             </form>
         </div>
 
-    </div> 
-
+    </div>
 </body>
 
 </html>
+<script src="./js/jquery-1.12.4.min.js"></script>
+<script>
+    /*
+    步骤:
+
+        1. 为登录按钮绑定点击事件
+        2. 获取用户名 和 密码
+        1. 去空格
+        2. 非空判断
+        3. 空 提示
+        4. 有  继续执行
+        3. ajax调用登录接口
+        1. 成功
+          1. 去首页
+        2. 失败
+          1. 提示用户
+        4. 搞定之后 记得git记录哦
+    */
+    $(function () {
+        // 登录按钮的点击事件
+        $('.input_sub').click(function (e) {
+            // 阻止默认刷新行为
+            e.preventDefault();
+            // 获取用户名
+            var user_name = $('.input_txt').val().trim();
+            // 获取用户密码
+            var password = $('.input_pass').val().trim();
+            // 非空判断
+            if (user_name == '' || password == '') {
+                alert('请输入您的用户名和密码');
+                return;
+            }
+            // ajax调用后台接口
+            $.ajax({
+                url: 'https://autumnfish.cn/big/admin/login',
+                type: 'post',
+                data: {
+                    user_name: user_name,
+                    password: password
+                },
+                success: function (backData) {
+                    console.log(backData);
+                    // 判断失败
+                    if (backData.code == 400) {
+                        alert('请输入正确的账号或密码')
+                        // 判断成功
+                    } else if (backData.code == 200) {
+                        // alert('登录成功，即将跳转页面')
+                        // 跳转后台首页
+                        window.location.href = './index.html'
+                    }
+                }
+            })
+        })
+    })
+</script>
