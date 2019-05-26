@@ -44,7 +44,12 @@
                     <label for="inputPassword3" class="col-sm-2 control-label">用户图标：</label>
                     <div class="col-sm-10">
                         <img src="images/2.jpg" alt="" class="user_pic">
-                        <input type="file" id="exampleInputFile" name="user_pic">
+                        <!-- 换行 -->
+                        <br>
+                        <!--这是新加的label标签-->
+                        <label for="exampleInputFile" class="glyphicon glyphicon-circle-arrow-up"
+                            style="font-size: 40px;color:yellowgreen"></label>
+                        <input type="file" id="exampleInputFile" name="user_pic" style="opacity: 0">
                     </div>
                 </div>
 
@@ -98,6 +103,19 @@
             2. 获取表单数据
             3. 通过ajax 结合formData发送到服务器
             4. 返回数据之后，提示用户
+
+
+
+        优化文件上传效果
+
+            步骤
+
+            1. 把input 藏起来
+            2. 弄个好看东西把他盖住
+            3. label 可以很好的和表单元素结合
+            ​	1.for属性指定到表单元素的id
+            ​	2. 可以实现 点击label等同于点击了表单元素
+            4. 工作中很少直接使用默认的input，因为真的很丑
         */
 
         $(function () {
