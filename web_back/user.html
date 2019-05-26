@@ -77,6 +77,15 @@
                 1. 进入个人中心之后
                 2. 调用获取用户详细信息接口
                 3. 数据获取到之后 渲染到 页面上
+
+
+       用户本地头像预览
+            步骤
+            1. 为input file 绑定change事件 
+            2. 获取this.files[0]
+            3. 调用方法生成url
+            4. 设置给隔壁的img即可
+     
         */
 
         $(function () {
@@ -102,6 +111,15 @@
                     $('.user_pic').attr('src', backData.data.user_pic);
 
                 }
+            })
+
+            $('#exampleInputFile').change(function () {
+                // file是DOM元素的属性
+                var file = this.files[0]
+                // 生成url
+                var url = URL.createObjectURL(file);
+                // 设置给隔壁的li
+                $(this).prev().attr('src', url);
             })
         })
     </script>
