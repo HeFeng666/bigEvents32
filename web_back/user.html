@@ -148,8 +148,8 @@
                 var file = this.files[0]
                 // 生成url
                 var url = URL.createObjectURL(file);
-                // 设置给隔壁的li
-                $(this).prev().attr('src', url);
+                // 设置给隔壁的img
+                $(this).siblings(img).attr('src', url);
             })
 
             // 修改按钮的点击事件
