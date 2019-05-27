@@ -171,17 +171,22 @@
         slug	string	别名
         */
         $(function () {
-            // 获取新增文章类别信息
-            $.ajax({
-                url: 'http://localhost:8000/admin/category_search',
-                type: 'get',
-                success: function (backData) {
-                    console.log(backData);
-                    // 调用模板引擎方法
-                    var html = template('list', backData);
-                    $('tbody').html(html);
-                }
-            })
+            function getCate() {
+                // 获取新增文章类别信息
+                $.ajax({
+                    url: 'http://localhost:8000/admin/category_search',
+                    type: 'get',
+                    success: function (backData) {
+                        console.log(backData);
+                        // 调用模板引擎方法
+                        var html = template('list', backData);
+                        $('tbody').html(html);
+                    }
+                })
+            }
+
+            // 默认调用一次
+            getCate();
 
             // 新增按钮的点击事件
             $('#model_add').click(function () {
@@ -199,11 +204,12 @@
                         slug: alias
                     },
                     success: function (backData) {
-                        console.log(backData)
-                        // 把新增的分类名称设置给分类名称栏，也就是第一个td
-                        $('#value_name').val(name)
-                        // 把新增的分类别名设置给分类别名栏，也就是第二个td
-                        $('#value_slug').val(alias)
+                        console.log(backData);
+                        if (backData.code == 200) {
+                            // 重新获取新增文章类别信息
+                            getCate();
+                        }
+
                     }
                 })
             })
