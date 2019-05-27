@@ -74,7 +74,7 @@
     <script>
         /*
         个人中心的获取基础数据
-            请求地址：https://autumnfish.cn/big32/admin/userinfo_get
+            请求地址：http://localhost:8000/admin/userinfo_get
             请求方式： get
             请求参数： 无
             进入之后， 获取用户的信息， 渲染到页面上
@@ -95,7 +95,7 @@
 
 
         保存修改,提交数据
-            请求地址：https://autumnfish.cn/big32/admin/userinfo_edit
+            请求地址：http://localhost:8000/admin/userinfo_edit
             请求方式：post
             请求参数：使用formdata提交
             步骤
@@ -120,7 +120,7 @@
 
         $(function () {
             $.ajax({
-                url: 'https://autumnfish.cn/big32/admin/userinfo_get',
+                url: 'http://localhost:8000/admin/userinfo_get',
                 type: 'get',
                 success: function (backData) {
                     console.log(backData);
@@ -149,7 +149,7 @@
                 // 生成url
                 var url = URL.createObjectURL(file);
                 // 设置给隔壁的img
-                $(this).siblings(img).attr('src', url);
+                $(this).siblings('img').attr('src', url);
             })
 
             // 修改按钮的点击事件
@@ -161,7 +161,7 @@
                 console.log(formData);
 
                 $.ajax({
-                    url: 'https://autumnfish.cn/big32/admin/userinfo_edit',
+                    url: 'http://localhost:8000/admin/userinfo_edit',
                     type: 'post',
                     data: formData,
                     success: function (backData) {

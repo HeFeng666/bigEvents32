@@ -155,7 +155,7 @@
 
         /*
         获取用户信息  
-            请求地址：https://autumnfish.cn/big32/admin/getuser    
+            请求地址：http://localhost:8000/admin/getuser    
             请求方式：get    
             请求参数：    
             步骤
@@ -174,7 +174,7 @@
                 $('.btn-primary').click(function () {
                     // ajax调用退出接口
                     $.ajax({
-                        url: 'https://autumnfish.cn/big/admin/logout',
+                        url: 'http://localhost:8000/admin/logout',
                         type: 'post',
                         success: function (backData) {
                             // console.log(backData);
@@ -188,7 +188,7 @@
 
             // 调用获取用户信息接口，获取用户信息
             $.ajax({
-                url: 'https://autumnfish.cn/big32/admin/getuser',
+                url: 'http://localhost:8000/admin/getuser',
                 type: 'get',
                 success: function (backData) {
                     console.log(backData);
