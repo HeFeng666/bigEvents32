@@ -144,7 +144,7 @@
             <td class="text-center">
                 <a href="javascript:editTr({&quot;id&quot;:&quot;1&quot;,&quot;slug&quot;:&quot;uncategorized&quot;,&quot;name&quot;:&quot;未分类&quot;});"
                     class="btn btn-info btn-xs">编辑</a>
-                <a href="javascript:deleteTr( 1 );" class="btn btn-danger btn-xs">删除</a>
+                <a href="javascript:deleteTr( {{$value.id}} );" class="btn btn-danger btn-xs">删除</a>
             </td>
         </tr>
     {{/each}}
@@ -169,10 +169,26 @@
         名称	类型	说明
         name	string	类别名称
         slug	string	别名
+
+
+
+    文章类别删除
+
+        请求地址：http://localhost:8000/admin/category_delete
+        请求方式：post
+        请求参数：id
+        步骤
+        1. 生成每一行的时候，把id拼接到deleteTr()
+        2. 实现deleteTr方法 获取id
+        3. 通过ajax删除对应的数据(ajax调用接口务必放在deleteTr方法中)
+        4. 删除成功之后 重新获取数据（局部刷新）
         */
+
+
+        // 入口函数
         $(function () {
+            // 获取文章类别信息
             function getCate() {
-                // 获取新增文章类别信息
                 $.ajax({
                     url: 'http://localhost:8000/admin/category_search',
                     type: 'get',
@@ -190,7 +206,7 @@
 
             // 新增按钮的点击事件
             $('#model_add').click(function () {
-                // 获取用户文本框新增的分类信息
+                // 获取用户文本框的分类信息
                 var name = $('.name').val();
                 // 获取用户文本框新增的分类别名
                 var alias = $('.alias').val();
@@ -213,6 +229,26 @@
                     }
                 })
             })
+
+
+            // 文章类别删除部分
+            // 为删除按钮的a标签中deleteTr($value.id)创建一个函数，并且window.deleteTr暴露出去，成为全局变量，里面ajax数据可以访问
+            window.deleteTr = function (id) {
+                // ajax调用文章类别删除接口
+                $.ajax({
+                    url: 'http://localhost:8000/admin/category_delete',
+                    type: 'post',
+                    data: { id: id },
+                    success: function (backData) {
+                        // 数据返回删除成功或者失败
+                        console.log(backData);
+                        if (backData.code == 200) {
+                            // 调用文章类别信息函数，重新再获取文章类别的信息
+                            getCate();
+                        }
+                    }
+                })
+            }
         })
 
     </script>
