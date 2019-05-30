@@ -24,10 +24,10 @@
                     <form class="form-inline">
                         <select id="selCategory" name="" class="form-control input-sm">
                             <option>所有分类</option>
-                            <option>未分类</option>
+                            <!-- <option>未分类</option>
                             <option>奇趣事</option>
                             <option>会生活</option>
-                            <option>爱旅行</option>
+                            <option>爱旅行</option> -->
                         </select>
                         <select id="selStatus" name="" class="form-control input-sm">
                             <option>所有状态</option>
@@ -58,7 +58,7 @@
 
 
                     <tr>
-                        
+
                         <td>王积千造统最头</td>
                         <td>杰克</td>
                         <td>奇趣事</td>
@@ -77,7 +77,7 @@
 
 
                     <tr>
-                     
+
                         <td>级电使正回</td>
                         <td>肉丝</td>
                         <td>爱旅行</td>
@@ -96,7 +96,7 @@
 
 
                     <tr>
-                       
+
                         <td>近难领管年算</td>
                         <td>杰克</td>
                         <td>会生活</td>
@@ -115,7 +115,7 @@
 
 
                     <tr>
-                       
+
                         <td>龙大实究</td>
                         <td>杰克</td>
                         <td>未分类</td>
@@ -134,7 +134,7 @@
 
 
                     <tr>
-                      
+
                         <td>算性得走来拉</td>
                         <td>肉丝</td>
                         <td>奇趣事</td>
@@ -153,7 +153,7 @@
 
 
                     <tr>
-                      
+
                         <td>几平会出气</td>
                         <td>管理员</td>
                         <td>奇趣事</td>
@@ -172,7 +172,7 @@
 
 
                     <tr>
-                      
+
                         <td>世团先证型角</td>
                         <td>杰克</td>
                         <td>奇趣事</td>
@@ -191,7 +191,7 @@
 
 
                     <tr>
-                      
+
                         <td>构更反步五</td>
                         <td>肉丝</td>
                         <td>奇趣事</td>
@@ -210,7 +210,7 @@
 
 
                     <tr>
-                       
+
                         <td>组方些</td>
                         <td>肉丝</td>
                         <td>会生活</td>
@@ -229,7 +229,7 @@
 
 
                     <tr>
-                      
+
                         <td>日做发光成</td>
                         <td>管理员</td>
                         <td>爱旅行</td>
@@ -250,31 +250,106 @@
             </table>
 
             <div class="row text-center">
-            <ul class="pagination pagination-sm">
-                <li class="page-item first disabled"><a href="#" class="page-link">首页</a></li>
-                <li class="page-item prev disabled"><a href="#" class="page-link">上一页</a></li>
-                <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                <li class="page-item"><a href="#" class="page-link">2</a></li>
-                <li class="page-item"><a href="#" class="page-link">3</a></li>
-                <li class="page-item"><a href="#" class="page-link">4</a></li>
-                <li class="page-item"><a href="#" class="page-link">5</a></li>
-                <li class="page-item"><a href="#" class="page-link">6</a></li>
-                <li class="page-item"><a href="#" class="page-link">7</a></li>
-                <li class="page-item next"><a href="#" class="page-link">下一页</a></li>
-                <li class="page-item last"><a href="#" class="page-link">尾页</a></li>
-            </ul>
-        </div>
+                <ul class="pagination pagination-sm">
+                    <li class="page-item first disabled"><a href="#" class="page-link">首页</a></li>
+                    <li class="page-item prev disabled"><a href="#" class="page-link">上一页</a></li>
+                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item"><a href="#" class="page-link">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                    <li class="page-item"><a href="#" class="page-link">6</a></li>
+                    <li class="page-item"><a href="#" class="page-link">7</a></li>
+                    <li class="page-item next"><a href="#" class="page-link">下一页</a></li>
+                    <li class="page-item last"><a href="#" class="page-link">尾页</a></li>
+                </ul>
+            </div>
 
         </div>
     </div>
 
     <script>
         // 设置左侧菜单
-        $('#release_btn').click(function(){
-            window.parent.setMenu(1,1);
+        $('#release_btn').click(function () {
+            window.parent.setMenu(1, 1);
         })
     </script>
 
+
+    <!-- 自己的js逻辑 -->
+    <!-- 导入模板引擎 -->
+    <script src="./js/template-web.js"></script>
+    <!-- 定义分类模板 -->
+    <script type="text/html" id="list">
+        {{each data}}
+            <option>{{$value.name}}</option>
+        {{/each}}
+    </script>
+    <!-- 定义文章模板 -->
+    <script type="text/html" id="article">
+        {{each data w}}
+            <tr>
+                <td>{{w.title}}</td>
+                <td>{{w.author}}</td>
+                <td>{{w.type}}</td>
+                <td class="text-center">{{w.date}}</td>
+                <td class="text-center">{{w.state}}</td>
+                <td class="text-center">
+                    <a href="article_edit.html" class="btn btn-default btn-xs">编辑</a>
+                    <a href="javascript:deleteTr( 1005 );" class="btn btn-danger btn-xs">删除</a>
+                </td>
+            </tr>
+        {{/each}}
+    </script>
+    <script>
+        /*
+        一.文章列表-分类获取信息
+            请求地址：http://localhost:8000/admin/category_search
+            请求方式：get
+            请求参数：无
+            步骤
+            1. 打开文章列表页
+            2. 调用文章分类数据接口 获取所有的分类
+            3. 获取到之后设置到页面左上角的 下拉框中
+
+        二.文章列表-分页数据获取
+            请求地址：http://localhost:8000/admin/search
+            请求方式：get
+            请求参数：page,perpage
+            步骤:
+            1. 进入文章列表页之后，通过ajax获取分页文章数据
+            2. page&perpage 第一页，每页6条
+            3. 数据回来之后渲染到页面上 模板引擎
+        */
+        $(function () {
+            // 列表分类信息获取
+            $.ajax({
+                url: 'http://localhost:8000/admin/category_search',
+                //这里方法默认为type：get，可以省略不写
+                // type:get,
+                success: function (backData) {
+                    console.log(backData);
+                    var html = template('list', backData);
+                    $('#selCategory').append(html);
+                }
+
+            })
+
+            // 列表分页信息获取
+            $.ajax({
+                url: 'http://localhost:8000/admin/search',
+                data: {
+                    page: 1,
+                    perpage: 10
+                },
+                success: function (backData) {
+                    console.log(backData);
+                    var html = template('article', backData)
+                    $('tbody').html(html);
+                }
+            })
+        })
+    </script>
 </body>
 
 </html>
