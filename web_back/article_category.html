@@ -250,18 +250,25 @@
                 // 判断当前这个新增分类按钮是否有btn-success这个类名,有就执行保存编辑按钮的逻辑，没有就else执行新增分类的逻辑，这样互不干扰
                 if ($(this).hasClass('btn-success')) {
                     // 获取在文本框内编辑好的数据。(通过属性选择器找到3个input文本框，再.val就是获取用户在文本框内编辑的信息)
-                    var id = $('input[name=id]').val()
-                    var slug = $('input[name=slug]').val()
-                    var name = $('input[name=name]').val()
+                    // var id = $('input[name=id]').val()
+                    // var slug = $('input[name=slug]').val()
+                    // var name = $('input[name=name]').val()
                     // ajax调用用户编辑好了的信息
                     $.ajax({
                         url: 'http://localhost:8000/admin/category_edit',
                         type: 'post',
-                        data: {
-                            id: id,
-                            slug: slug,
-                            name: name
-                        },
+                        // data: {
+                        //     id: id,
+                        //     slug: slug,
+                        //     name: name
+                        // },
+                        // $('form').serialize()是jquery方法，快速获取表单元素数据，最终返回name1=value1&name2=value2&name3=value3
+                        /*ajax的data支持：
+                        1.key1=value1&key2=value2&key3=value3
+                        2.对象
+                        3.formData
+                        */
+                        data: $('form').serialize(),
                         success: function (backData) {
                             console.log(backData);
                             // 调用获取文章类别信息的函数(重新再获取一次文章类别局部页面信息)
